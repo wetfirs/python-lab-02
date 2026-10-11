@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from streamstats.errors import InvalidEventError, InvalidTimestampError
 
 FIELDS = ("timestamp", "level", "source", "message")

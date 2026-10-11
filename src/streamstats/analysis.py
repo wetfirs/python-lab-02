@@ -1,11 +1,16 @@
 from collections.abc import Iterable
 
-def analyse_events(events: Iterable[dict]) -> dict:
+from streamstats.models import LEVELS
+
+
+def analyse_events(events: Iterable[dict | None]) -> dict:
     sources = {}
     event_count, skip_count = 0, 0
     sources_error_critical = {}
     timestamp_min, timestamp_max = None, None
-    levels = {"DEBUG": 0, "INFO": 0, "WARNING": 0, "ERROR": 0, "CRITICAL": 0}
+    levels = {}
+    for i in LEVELS:
+        levels[i] = 0
     for event in events:
         if event is None:
             skip_count += 1

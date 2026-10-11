@@ -1,10 +1,12 @@
-import json
 import csv
+import json
 import logging
 from collections.abc import Iterator
-from streamstats.errors import InvalidEventError, InvalidTimestampError
-from streamstats.models import create_event, FIELDS
 
+from streamstats.errors import InvalidEventError, InvalidTimestampError
+from streamstats.models import FIELDS, create_event
+
+logger = logging.getLogger(__name__)
 
 def parse_jsonl(file: str, skip_invalid: bool = False) -> Iterator[dict | None]:
     with open(file, "r", encoding="utf-8") as f:
@@ -29,21 +31,21 @@ def parse_jsonl(file: str, skip_invalid: bool = False) -> Iterator[dict | None]:
                 if not skip_invalid:
                     raise InvalidEventError(f"{file}, {index}: некорректный json")
                 else: 
-                    logging.warning(f"{file}, {index}: некорректный json")
+                    logger.warning(f"{file}, {index}: некорректный json")
                     yield None
                     continue
             except InvalidEventError as error:
                 if not skip_invalid:            
                     raise InvalidEventError(f"{file}, {index}: {error}")
                 else:
-                    logging.warning(f"{file}, {index}: {error}")
+                    logger.warning(f"{file}, {index}: {error}")
                     yield None
                     continue
             except InvalidTimestampError as error:
                 if not skip_invalid:
                     raise InvalidTimestampError(f"{file}, {index}: {error}")
                 else:
-                    logging.warning(f"{file}, {index}: {error}")
+                    logger.warning(f"{file}, {index}: {error}")
                     yield None
                     continue
             
@@ -73,21 +75,21 @@ def parse_csv(file: str, skip_invalid: bool = False) -> Iterator[dict | None]:
                 if not skip_invalid:
                     raise InvalidEventError(f"{file}, {index}: некорректный csv")
                 else:
-                    logging.warning(f"{file}, {index}: некорректный csv")
+                    logger.warning(f"{file}, {index}: некорректный csv")
                     yield None
                     continue
             except InvalidEventError as error:
                 if not skip_invalid:
                     raise InvalidEventError(f"{file}, {index}: {error}")
                 else:
-                    logging.warning(f"{file}, {index}: {error}")
+                    logger.warning(f"{file}, {index}: {error}")
                     yield None
                     continue
             except InvalidTimestampError as error:
                 if not skip_invalid:
                     raise InvalidTimestampError(f"{file}, {index}: {error}")
                 else:
-                    logging.warning(f"{file}, {index}: {error}")
+                    logger.warning(f"{file}, {index}: {error}")
                     yield None
                     continue
             yield event

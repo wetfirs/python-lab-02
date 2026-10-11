@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "streamstats"
+version = "0.1.0"
+description = "Потоковый анализатор событий из CSV и JSONL"
+requires-python = ">=3.12"
+
+[tool.setuptools.packages.find] 
+where = ["src"]
+
+[project-optional-dependencies]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.9",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.17.0",
+]
