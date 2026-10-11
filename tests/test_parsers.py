@@ -22,7 +22,7 @@ def test_parse_jsonl(tmp_path):
 
 def test_parse_csv(tmp_path):
     input_file = tmp_path / "events.csv"
-    input_file.write_text("timestamp,level,source,message\n" \
+    input_file.write_text("timestamp,level,source,message\n"
     "2026-09-15T15:00:00,DEBUG,site,hi\n",
     encoding="utf-8",
     )
@@ -103,6 +103,7 @@ def test_parse_jsonl_invalid_timestamp(tmp_path):
     assert "timestamp" in message
     assert f"{input_file}, 1:" in message
 
+
 def test_parse_jsonl_invalid_line_7(tmp_path):
     input_file = tmp_path / "events.jsonl"
     valid_line = '{"timestamp": "2026-10-08T10:00:00", "level": "INFO", "source": "app", "message": "hello"}\n'
@@ -113,6 +114,7 @@ def test_parse_jsonl_invalid_line_7(tmp_path):
     with pytest.raises(InvalidEventError) as error:
         list(parse_jsonl(str(input_file)))
     assert f"{input_file}, 7:" in str(error.value)
+
 
 def test_parse_jsonl_invalid_json_skip(tmp_path):
     input_file = tmp_path / "events.jsonl"
@@ -125,4 +127,5 @@ def test_parse_jsonl_invalid_json_skip(tmp_path):
     assert len(events) == 2
     assert events[0] is None
     assert events[1]["message"] == "после ошибки"
+
 
