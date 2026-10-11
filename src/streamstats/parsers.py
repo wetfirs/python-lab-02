@@ -32,7 +32,7 @@ def parse_jsonl(file: str, skip_invalid: bool = False) -> Iterator[dict | None]:
                 if not skip_invalid:
                     raise InvalidEventError(f"{file}, {index}: некорректный json")
                 logger.warning(f"{file}, {index}: некорректный json")
-                yield None
+                yield None # для подсчета пропущенных значений в анализаторе
                 continue
             except InvalidEventError as error:
                 if not skip_invalid:            

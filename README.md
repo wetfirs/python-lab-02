@@ -31,7 +31,7 @@
 
 - `to_json` — сохраняет JSON-отчёт
 
-### __main__.py
+### \_\_main\_\_.py
 
 - `read_events` — объединяет события нескольких файлов
 - `main` — обрабатывает аргументы и запускает анализ
@@ -66,22 +66,20 @@
 uv sync
 ```
 
-Активация окружения (macOS/Linux):
+Активация окружения:
 
 ```bash
 source .venv/bin/activate
 ```
 
-Анализ CSV:
+CLI:
 
 ```bash
-python -m streamstats analyze events.csv --format csv --output report.json
+python -m streamstats analyze INPUT [INPUT ...] --format csv|jsonl --output REPORT.json
 ```
 
-Анализ нескольких JSONL-файлов с пропуском ошибок:
-
 ```bash
-python -m streamstats analyze first.jsonl second.jsonl --format jsonl --skip-invalid
+python -m streamstats analyze INPUT --format jsonl --skip-invalid
 ```
 
 Справка:
@@ -90,28 +88,13 @@ python -m streamstats analyze first.jsonl second.jsonl --format jsonl --skip-inv
 python -m streamstats --help
 ```
 
-## Формат данных
-
-Обязательные поля:
-
-- `timestamp` — дата и время ISO 8601
-- `level` — DEBUG, INFO, WARNING, ERROR, CRITICAL
-- `source` — непустая строка
-- `message` — строка
-
-## Обработка ошибок
-
-- По умолчанию — остановка, путь и номер строки, код завершения `2`
-- С `--skip-invalid` — предупреждение в логе, пропуск записи, подсчёт пропусков
-- Отчёт по умолчанию — `report.json`
-
-## Тестирование
+## Тестирование:
 
 ```bash
 python -m pytest -v
 ```
 
-## Проверка качества кода
+## Проверка качества кода:
 
 ```bash
 ruff check .

@@ -127,5 +127,3 @@ def test_parse_jsonl_invalid_json_skip(tmp_path):
     assert len(events) == 2
     assert events[0] is None
     assert events[1]["message"] == "после ошибки"
-
-
