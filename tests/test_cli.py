@@ -8,10 +8,10 @@ def test_cli_multiple_files(tmp_path):
     second_file = tmp_path / "second.jsonl"
     report_file = tmp_path / "report.json"
     first_text = (
-        '{"timestamp": "2026-10-08T10:00:00", "level": "INFO", "source": "app", "message": "сообщение"}\n'
+        '{"timestamp": "2026-10-08T10:00:00", "level": "INFO", "source": "сайт", "message": "сообщение"}\n'
     )
     second_text = (
-        '{"timestamp": "2026-10-09T22:00:00", "level": "ERROR", "source": "app", "message": "сообщение"}\n'
+        '{"timestamp": "2026-10-09T22:00:00", "level": "ERROR", "source": "сайт", "message": "сообщение"}\n'
     )
 
     first_file.write_text(first_text, encoding="utf-8")
@@ -34,8 +34,8 @@ def test_cli_multiple_files(tmp_path):
     report = json.loads(report_text)
 
     assert report["event_count"] == 2
-    assert report["sources"] == {"app": 2}
-    assert "app" in report_text
+    assert report["sources"] == {"сайт": 2}
+    assert "сайт" in report_text
 
     assert first_file.read_text(encoding="utf-8") == first_text
     assert second_file.read_text(encoding="utf-8") == second_text

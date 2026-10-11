@@ -9,6 +9,7 @@ from streamstats.models import FIELDS, create_event
 logger = logging.getLogger(__name__)
 
 def parse_jsonl(file: str, skip_invalid: bool = False) -> Iterator[dict | None]:
+    """Читает события из JSONL"""
     with open(file, "r", encoding="utf-8") as f:
         for index, line in enumerate(f, start=1):
             try:
@@ -53,8 +54,9 @@ def parse_jsonl(file: str, skip_invalid: bool = False) -> Iterator[dict | None]:
 
 
 def parse_csv(file: str, skip_invalid: bool = False) -> Iterator[dict | None]:
+    """Читает события из CSV"""
     with open(file, "r", encoding="utf-8", newline="") as f:
-        reader = csv.DictReader(f)
+        reader = csv.DictReader(f, strict=True)
         while True:
             try:
                 row = next(reader)

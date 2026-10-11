@@ -7,6 +7,7 @@ LEVELS = ("DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL")
 
 
 def create_event(timestamp: object, level: object, source: object, message: object) -> dict:
+    """Проверяет поля события и возвращает словарь с датой в формате datetime"""
     if not isinstance(timestamp, str):
         raise InvalidTimestampError(f"timestamp {timestamp} должен быть строкой")
     try:

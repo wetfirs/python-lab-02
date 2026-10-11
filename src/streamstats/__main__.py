@@ -1,6 +1,7 @@
 import argparse
 import sys
 from pathlib import Path
+from collections.abc import Iterator
 
 from streamstats.analysis import analyse_events
 from streamstats.errors import CLIConfigError, StreamStatsError, UnsupportedFormatError
@@ -8,7 +9,7 @@ from streamstats.parsers import parse_csv, parse_jsonl
 from streamstats.report import to_json
 
 
-def read_events(files, parse_file, skip_invalid):
+def read_events(files: list[str], parse_file, skip_invalid: bool) -> Iterator[dict | None]:
     for file in files:
         yield from parse_file(file, skip_invalid)
 

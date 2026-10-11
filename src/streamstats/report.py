@@ -2,6 +2,7 @@ import json
 
 
 def to_json(output_file: str, statistics: dict) -> None:
+    """Сохраняет статистику в JSON файл, преобразуя даты в строки"""
     stat_copy = statistics.copy()
     if stat_copy["timestamp_min"] is not None:
         stat_copy["timestamp_min"] = stat_copy["timestamp_min"].isoformat()

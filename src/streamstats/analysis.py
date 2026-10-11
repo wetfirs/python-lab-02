@@ -4,6 +4,7 @@ from streamstats.models import LEVELS
 
 
 def analyse_events(events: Iterable[dict | None]) -> dict:
+    """Собирает статистику событий и подсчитывает пропущенные записи"""
     sources = {}
     event_count, skip_count = 0, 0
     sources_error_critical = {}
