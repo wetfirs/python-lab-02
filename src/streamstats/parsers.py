@@ -31,24 +31,21 @@ def parse_jsonl(file: str, skip_invalid: bool = False) -> Iterator[dict | None]:
             except json.JSONDecodeError:
                 if not skip_invalid:
                     raise InvalidEventError(f"{file}, {index}: некорректный json")
-                else: 
-                    logger.warning(f"{file}, {index}: некорректный json")
-                    yield None
-                    continue
+                logger.warning(f"{file}, {index}: некорректный json")
+                yield None
+                continue
             except InvalidEventError as error:
                 if not skip_invalid:            
                     raise InvalidEventError(f"{file}, {index}: {error}")
-                else:
-                    logger.warning(f"{file}, {index}: {error}")
-                    yield None
-                    continue
+                logger.warning(f"{file}, {index}: {error}")
+                yield None
+                continue
             except InvalidTimestampError as error:
                 if not skip_invalid:
                     raise InvalidTimestampError(f"{file}, {index}: {error}")
-                else:
-                    logger.warning(f"{file}, {index}: {error}")
-                    yield None
-                    continue
+                logger.warning(f"{file}, {index}: {error}")
+                yield None
+                continue
             
             yield event
 
@@ -76,22 +73,19 @@ def parse_csv(file: str, skip_invalid: bool = False) -> Iterator[dict | None]:
                 index = reader.reader.line_num
                 if not skip_invalid:
                     raise InvalidEventError(f"{file}, {index}: некорректный csv")
-                else:
-                    logger.warning(f"{file}, {index}: некорректный csv")
-                    yield None
-                    continue
+                logger.warning(f"{file}, {index}: некорректный csv")
+                yield None
+                continue
             except InvalidEventError as error:
                 if not skip_invalid:
                     raise InvalidEventError(f"{file}, {index}: {error}")
-                else:
-                    logger.warning(f"{file}, {index}: {error}")
-                    yield None
-                    continue
+                logger.warning(f"{file}, {index}: {error}")
+                yield None
+                continue
             except InvalidTimestampError as error:
                 if not skip_invalid:
                     raise InvalidTimestampError(f"{file}, {index}: {error}")
-                else:
-                    logger.warning(f"{file}, {index}: {error}")
-                    yield None
-                    continue
+                logger.warning(f"{file}, {index}: {error}")
+                yield None
+                continue
             yield event

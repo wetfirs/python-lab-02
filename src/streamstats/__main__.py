@@ -1,7 +1,7 @@
 import argparse
 import sys
-from pathlib import Path
 from collections.abc import Iterator
+from pathlib import Path
 
 from streamstats.analysis import analyse_events
 from streamstats.errors import CLIConfigError, StreamStatsError, UnsupportedFormatError

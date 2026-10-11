@@ -35,12 +35,11 @@ def analyse_events(events: Iterable[dict | None]) -> dict:
     top_5_sources = sorted_sources[:5]
     statistics = {
         "event_count": event_count,
-        "skip_count": skip_count
+        "skip_count": skip_count,
+        "levels": levels,
+        "sources": sources,
+        "timestamp_min": timestamp_min,
+        "timestamp_max": timestamp_max,
+        "top_5_sources": top_5_sources
     }
-    statistics["levels"] = levels
-    statistics["sources"] = sources
-    statistics["timestamp_min"] = timestamp_min
-    statistics["timestamp_max"] = timestamp_max
-    statistics["top_5_sources"] = top_5_sources
-
     return statistics
